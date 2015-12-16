@@ -4,6 +4,7 @@
 	<title>Lista Telefonica</title>
 	<link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/app.css">
+	<link rel="stylesheet" type="text/css" href="css/ui.css">
 
 	<script type="text/javascript" src="lib/angular/angular.min.js"></script>
 	<script type="text/javascript" src="lib/angular/angular-messages.js"></script>
@@ -12,13 +13,20 @@
 	<script type="text/javascript" src="js/controllers/listaTelefonicaCtrl.js" ></script>
 	<script type="text/javascript" src="js/services/contatosAPIService.js"></script>
 	<script type="text/javascript" src="js/services/operadorasAPIService.js"></script>
-	<script src="js/services/serialGeneratorService.js"></script>
-	<script src="js/config/serialGeneratorConfig.js"></script>
-	<script src="js/value/configValue.js"></script>
+	<script type="text/javascript" src="js/services/serialGeneratorService.js"></script>
+    <script type="text/javascript" src="js/filters/nameFilter.js"></script>
+	<script type="text/javascript" src="js/config/serialGeneratorConfig.js"></script>
+	<script type="text/javascript" src="js/value/configValue.js"></script>
+	<script type="text/javascript" src="js/directives/uiAlertDirective.js"></script>
+
 </head>
 <body ng-controller="listaTelefonicaCtrl">
 	<div class="jumbotron">
-		<h4>{{app}}</h4> 
+		<h3>{{app}}</h3>
+
+		{{$id}}
+		<ui-alert title="Ops, aconteceu um problema!" message="error"></ui-alert>
+
 		<input class="form-control" type="text" ng-model="criterioDeBusca" placeholder="O que você está buscando?" />
 		<table ng-show="contatos.length > 0" class="table">
 			<tr>
@@ -35,7 +43,7 @@
 				<td>{{contato.serial}}</td>
 				<td>{{contato.nome}}</td>
 				<td>{{contato.telefone}}</td>
-				<td>{{contato.operadora.nome}}</td>
+				<td>{{contato.operadora.nome | name }}</td>
 				<td>{{contato.data | date:'dd/MM/yyyy'}}</td>
 				<td><div style="width: 20px; height: 20px;" ng-style="{'background-color': contato.cor}"> </div></td>
 			</tr>
